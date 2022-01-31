@@ -1,3 +1,10 @@
+# mac files
+*.DS_Store
+
+# Lammps
+*.lammpstrj
+*.lammps
+
 # Prerequisites
 *.d
 
