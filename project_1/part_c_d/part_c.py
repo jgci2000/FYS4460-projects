@@ -12,7 +12,7 @@ t = np.zeros((len(T_vals), n_measure))
 P = np.zeros((len(T_vals), n_measure))
 
 for i, T_in in enumerate(T_vals):
-    p_name = "lmp_serial -in first_md_sim/in.myfirstmd -v T %.10f" % (T_in)
+    p_name = "lmp_serial -in in.simple_md -v T %.10f -v i %i" % (T_in, i+1)
     lammps = subprocess.Popen(p_name.split(" "))
     lammps.wait()
     
@@ -23,7 +23,6 @@ for i, T_in in enumerate(T_vals):
     P[i, :] = file.get("Press")
     
     print(f"done {i+1}/{len(T_vals)}")
-
 
 plt.figure("P vs T")
 plt.plot(np.mean(T[:, :-10], axis=1), np.mean(P[:, :-10], axis=1), 'o-b')
